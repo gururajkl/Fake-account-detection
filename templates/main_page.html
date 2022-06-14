@@ -1,0 +1,106 @@
+{% extends 'layout.html' %} {% block body %}
+<style>
+  html body {
+    background-color: rgb(206, 206, 228);
+  }
+
+  #predict {
+    font-size: large;
+    text-align: center;
+    padding: 500dp;
+  }
+</style>
+<!--Form Section-->
+<br /><br />
+<h2 style="text-align: center; margin: 0px; color: black">
+  <b>Twitter Fake Account detection</b>
+</h2>
+<br />
+
+
+<head>
+  <script>
+    function myFunction() {
+      window.stop();
+      const open = document.getElementById('open');
+      const mc = document.getElementById('model-container');
+      const close = document.getElementById('close');
+
+      open.addEventListener('click', () => {
+        mc.classList.add('show');
+      });
+
+      close.addEventListener('click', () => {
+        mc.classList.remove('show');
+      });
+    }
+  </script>
+</head>
+
+<div class="container">
+  <br>
+  <!--Form-->
+  <form action="{{url_for('predict')}}" method="POST">
+    <fieldset>
+      <!-- <legend style="background-color:red;">Twitter Fake Account detection Form</legend> -->
+      <br>
+      <div class="card card-body">
+        <div class="form-group  row">
+          <div class="col-sm-3">
+            <label for="acc">Number of Accounts</label>
+            <input type="number" class="form-control" id="acc" name="acc" required>
+          </div>
+          <br>
+          <div class="col-sm-3">
+
+            <label for="ab">No Of Abuse Report</label>
+            <input type="number" class="form-control" id="ab" name="ab" required>
+          </div>
+          <br>
+          <div class="col-sm-3">
+            <label for="rg">No Of Rejected Friend Requests</label>
+            <input type="number" class="form-control" id="rg" name="rg" required>
+          </div>
+        </div>
+        <div class="form-group  row">
+          <div class="col-sm-3">
+            <label for="rq">No Of Freind Req That Not Accepted</label>
+            <input type="number" class="form-control" id="rq" name="rq" required>
+          </div>
+          <div class="col-sm-3">
+            <label for="fd">No Of Friends</label>
+            <input type="number" class="form-control" id="fd" name="fd" required>
+          </div>
+          <div class="col-sm-3">
+            <label for="fl">No Of Followers</label>
+            <input type="number" class="form-control" id="fl" name="fl" required>
+          </div>
+
+        </div>
+        <br>
+        <div class="form-group  row">
+          <div class="col-sm">
+            <label for="cm">No Of Comments Per Day</label>
+            <input type="number" class="form-control" id="cm" name="cm" required>
+          </div>
+          <div class="col-sm">
+            <label for="uk">No Of Likes To Unknown Account</label>
+            <input type="number" class="form-control" id="uk" name="uk" required>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+          <input id="open" class="btn btn-primary" type="submit" value="Result" onclick="myFunction()">
+        </div>
+
+    </fieldset>
+  </form>
+
+  <div id="Predict" style="padding-bottom: 20px;">
+    <strong style="color:red">{{result}}</strong>
+  </div>
+
+  <!-- Form section -->
+
+  {% endblock %}
